@@ -14,4 +14,4 @@
     emergencyContactNo: string;
     presentAddress: string;
     permanentAddress: string;
-}   
+}
