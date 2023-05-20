@@ -3,10 +3,12 @@ import User from "./user.model";
 
 export const createUserToDB = async (payload: IUser)
     : Promise<IUser> => {
-
-    const user = new User(payload);
+//   instance: creating a new user
+    const user = new User(payload); // User -> class , user -> instance
     await user.save();
+    console.log(user.fullName());
     return user;
+    
     /**
      * old
       id: 70800033398,
@@ -34,4 +36,30 @@ export const createUserToDB = async (payload: IUser)
 export const getUserFromDB = async (): Promise<IUser[] > => {
 const users = await User.find();
     return users;
+};
+
+export const getUserByIdFromDB=async(payload:
+    string): Promise<IUser | null>=> {
+ const user = await User.findOne({id:payload}, {name: 1, emergencyContactNo: 1, role: 1});
+ return user;
+};
+
+export const getAdminUsersFromDB=async()=> {
+        const admins = await User.getAdminUsers();
+        return admins;
+ // static class er shate attach hoyjai tai call kora jai 
+};
+// static= class -> attach -> method-> directly call using class
+//user = new User 
+// user. instance 
+
+// but User.getAdminUsers()
+
+export const getStudentUsersFromDB=async()=> {
+    const students = await User.getStudentUsers();
+    return students;
+   
+
+
+// static class er shate attach hoyjai tai call kora jai 
 };
